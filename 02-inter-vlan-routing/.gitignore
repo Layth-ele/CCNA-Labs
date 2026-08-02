@@ -1,0 +1,18 @@
+# macOS system files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Cisco Packet Tracer autosave / backup / lock files
+*.pkt.bak
+*.pka.bak
+*~
+*.tmp
+*.autosave
+*.backup
+
+# Editor / IDE clutter
+.vscode/
+.idea/
+*.swp
