@@ -11,11 +11,12 @@ the topology, addressing, configuration, and verification steps.
 | 01 | [Basic Routing](01-basic-routing/) | Directly connected networks, router interfaces, default gateways |
 | 02 | [Inter-VLAN Routing](02-inter-vlan-routing/) | VLANs, access & trunk ports, router-on-a-stick, 802.1Q subinterfaces |
 | 03 | [Static Routing](03-static-routing/) | Two routers, WAN /30 link, `ip route`, CDP troubleshooting |
+| 04 | [OSPF (single-area)](04-ospf/) | Dynamic routing, OSPF neighbors, wildcard masks |
 
 ## Roadmap
 
-Planned: OSPF, VLAN trunking across switches, EtherChannel, Spanning Tree,
-DHCP, NAT/PAT, ACLs, port security, SSH/device hardening, wireless.
+Planned: VLAN trunking across switches, EtherChannel, Spanning Tree, DHCP,
+NAT/PAT, ACLs, port security, SSH/device hardening, wireless.
 
 ## Notes
 
