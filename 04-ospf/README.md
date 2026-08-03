@@ -17,6 +17,13 @@ method changes.
    PC1 PC2                                                PC3 PC4
 ```
 
+## Equipment
+
+- 2 × Router (2911)
+- 2 × Switch (2960)
+- 4 × PC
+- Copper straight-through cables
+
 ## Addressing table
 
 | Device | Interface | IP Address   | Subnet Mask       | Role      |
