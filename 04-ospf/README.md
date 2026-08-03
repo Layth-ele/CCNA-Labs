@@ -39,7 +39,7 @@ Both routers are wired the same way: **Gig0/0 = LAN**, **Gig0/1 = WAN**.
 | PC3    | —         | 192.168.2.2  | 255.255.255.0     | GW 192.168.2.1 |
 | PC4    | —         | 192.168.2.3  | 255.255.255.0     | GW 192.168.2.1 |
 
-## R1 configuration (Router0)
+## R1 configuration
 
 ```
 enable
@@ -61,7 +61,7 @@ end
 copy running-config startup-config
 ```
 
-## R2 configuration (Router1)
+## R2 configuration
 
 ```
 enable
@@ -121,6 +121,7 @@ by OSPF rather than typed in by hand.
 | Neighbor stuck in EXSTART/EXCHANGE | MTU mismatch on the link |
 | Ping fails but routes present | PC IP/gateway wrong |
 | Route missing for a LAN | `network` statement doesn't cover that interface |
+| Empty neighbor table | OSPF not configured on one of the routers |
 | WAN interface up/down | Other router's WAN interface not configured yet |
 
 ## Files
