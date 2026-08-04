@@ -13,11 +13,12 @@ the topology, addressing, configuration, and verification steps.
 | 03 | [Static Routing](03-static-routing/) | Two routers, WAN /30 link, `ip route`, CDP troubleshooting |
 | 04 | [OSPF (single-area)](04-ospf/) | Dynamic routing, OSPF neighbors, wildcard masks |
 | 05 | [DHCP](05-dhcp/) | Router as DHCP server, address pools, excluded addresses, leases |
+| 06 | [NAT / PAT](06-nat/) | NAT overload, inside/outside interfaces, ACL match, default route |
 
 ## Roadmap
 
-Planned: VLAN trunking across switches, EtherChannel, Spanning Tree, NAT/PAT,
-ACLs, port security, SSH/device hardening, wireless.
+Planned: ACLs, VLAN trunking across switches, EtherChannel, Spanning Tree,
+port security, SSH/device hardening, IPv6, wireless.
 
 ## Notes
 
