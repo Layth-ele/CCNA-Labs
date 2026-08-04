@@ -33,8 +33,8 @@ exactly how a home router puts every device online with one ISP address.
 
 | Device | Interface  | IP Address   | Subnet Mask       | Role                |
 |--------|------------|--------------|-------------------|---------------------|
-| R1     | Gig0/0     | 192.168.1.1  | 255.255.255.0     | Inside (LAN gwy)    |
-| R1     | Gig0/1     | 200.0.0.1    | 255.255.255.252   | Outside (public)    |
+| R1     | Gig0/1     | 192.168.1.1  | 255.255.255.0     | Inside (LAN gwy)    |
+| R1     | Gig0/0     | 200.0.0.1    | 255.255.255.252   | Outside (public)    |
 | ISP    | Gig0/1     | 200.0.0.2    | 255.255.255.252   | Link to R1          |
 | ISP    | Loopback0  | 8.8.8.8      | 255.255.255.255   | "Internet" host     |
 | PC1    | —          | 192.168.1.2  | 255.255.255.0     | GW 192.168.1.1      |
