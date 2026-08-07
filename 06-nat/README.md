@@ -7,6 +7,8 @@ exactly how a home router puts every device online with one ISP address.
 
 ## Topology
 
+![NAT lab topology](topology.png)
+
 ```
    Inside (private)                          Outside (public)
   192.168.1.0/24                              200.0.0.0/30
@@ -127,8 +129,10 @@ two conversations apart. A reply with **TTL=254** confirms two router hops.
 | Ping to 8.8.8.8 fails | Missing `ip nat inside`/`outside`, or default route absent |
 | `show ip nat translations` empty | ACL missing, or NAT rule points at wrong interface |
 | NAT "Dynamic mappings" empty | access-list 1 not created |
+| Both interfaces show as outside | LAN interface missing `ip nat inside` |
 | Reaches 200.0.0.2 but not 8.8.8.8 | ISP loopback not configured, or R1 default route wrong |
 
 ## Files
 
 - `nat.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
