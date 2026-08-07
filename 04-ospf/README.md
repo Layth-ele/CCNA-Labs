@@ -7,12 +7,14 @@ method changes.
 
 ## Topology
 
+- !OSPFP lab topology](topology.png)
+
 ```
      LAN A                                              LAN B
   192.168.1.0/24                                    192.168.2.0/24
       |                                                   |
   +-------+   Gig0/0   Gig0/1   WAN   Gig0/1   Gig0/0  +-------+
-  |Switch0|----[ R1 ]==================[ R2 ]----|Switch1|
+  |Switch1|----[ R1 ]==================[ R2 ]----|Switch2|
   +--+-+--+           10.0.0.1  10.0.0.2         +--+-+--+
    PC1 PC2          (10.0.0.0/30 WAN link)        PC3 PC4
 ```
@@ -127,3 +129,4 @@ by OSPF rather than typed in by hand.
 ## Files
 
 - `ospf.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
