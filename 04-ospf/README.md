@@ -7,7 +7,7 @@ method changes.
 
 ## Topology
 
-- !OSPFP lab topology](topology.png)
+[!OSPFP lab topology](topology.png)
 
 ```
      LAN A                                              LAN B
