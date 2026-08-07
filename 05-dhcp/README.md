@@ -6,6 +6,8 @@ leases an address, subnet mask, gateway, and DNS server from the router.
 
 ## Topology
 
+![DHCP lab topology](topology.png)
+
 ```
         +--------+
         |   R1   |  Gig0/0 = 192.168.10.1/24  (gateway + DHCP server)
@@ -103,3 +105,4 @@ show ip dhcp pool       ! shows how many addresses have been leased
 ## Files
 
 - `dhcp.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
