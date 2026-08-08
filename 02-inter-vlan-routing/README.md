@@ -6,6 +6,8 @@ route between VLANs, and a step up from using separate physical router ports.
 
 ## Topology
 
+![Inter-VLAN routing lab topology]
+
 ```
                   ┌──────────┐
                   │  Router  │  Gig0/0 (trunk, subinterfaces .10 / .20)
@@ -108,9 +110,6 @@ VLAN. `encapsulation dot1Q 10` tags traffic for VLAN 10.
 3. Shut the router (`interface g0/0` → `shutdown`) and the cross-VLAN ping
    fails while same-VLAN still works — proof the router is doing the routing.
 
-## Files
-
-- `lab2-inter-vlan-routing.pkt` — the Packet Tracer project file.
 
 ## Troubleshooting
 
@@ -120,3 +119,8 @@ VLAN. `encapsulation dot1Q 10` tags traffic for VLAN 10.
 | Same-VLAN ping fails | PC in wrong access VLAN, or wrong IP/gateway |
 | Router subinterface down | Physical `g0/0` still shut down |
 | All pings fail | Forgot `no shutdown` on the physical interface |
+
+## Files
+
+- `lab2-inter-vlan-routing.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
