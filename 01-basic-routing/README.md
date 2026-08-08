@@ -7,6 +7,8 @@ connectivity with `ping`.
 
 ## Topology
 
+![Basic routing lab topology](topology.png)
+
 ```
                     ┌──────────────┐
         192.168.10.1│    Router    │192.168.11.1
@@ -80,9 +82,6 @@ is always the router's interface on that PC's own subnet.
 4. Use **Simulation mode** to watch a packet travel PC → switch → router →
    switch → PC.
 
-## Files
-
-- `simple-network-activity.pkt` — the Packet Tracer project file.
 
 ## Troubleshooting
 
@@ -92,3 +91,11 @@ is always the router's interface on that PC's own subnet.
 | Ping to other subnet fails | Missing/incorrect default gateway on the PC |
 | Router interface stays down | Forgot `no shutdown` |
 | Link light red/amber | Wrong cable type or wrong port |
+
+
+
+## Files
+
+- `basic-routing.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
+
