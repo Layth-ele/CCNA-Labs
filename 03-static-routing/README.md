@@ -6,6 +6,8 @@ manually with the `ip route` command. This is the core idea behind IP routing.
 
 ## Topology
 
+![Static Routing Between Two Routers  lab topology](topology.png)
+
 ```
      LAN A                                              LAN B
   192.168.1.0/24                                    192.168.2.0/24
@@ -128,3 +130,4 @@ which remote port, so you can confirm the cabling matches your intended config.
 ## Files
 
  `static-routing.pkt` — the Packet Tracer project file.
+- `topology.png` — topology screenshot.
