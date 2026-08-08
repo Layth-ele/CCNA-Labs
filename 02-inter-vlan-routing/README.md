@@ -6,7 +6,7 @@ route between VLANs, and a step up from using separate physical router ports.
 
 ## Topology
 
-![Inter-VLAN routing lab topology]
+![Inter-VLAN routing lab topology](topology.png)]
 
 ```
                   ┌──────────┐
