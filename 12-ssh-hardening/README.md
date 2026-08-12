@@ -49,7 +49,7 @@ end
 Set PC1 to 192.168.1.10 (gateway 192.168.1.1), then confirm `ping 192.168.1.1`
 works before configuring SSH.
 
-## Step 2 — configure SSH
+## Step 2 — configure SSH (do this from the router console)
 
 ```
 configure terminal
@@ -57,6 +57,10 @@ configure terminal
 ! hostname + domain (required before generating the crypto key)
 hostname R1
 ip domain-name lab.local
+
+! REQUIRED for privileged mode over SSH — set this before testing remote login.
+! Without an enable secret, "enable" over SSH fails with "% No password set".
+enable secret class123
 
 ! local username/password for login
 username admin secret cisco123
@@ -81,6 +85,10 @@ copy running-config startup-config
 
 - `hostname` + `ip domain-name` — the RSA key name is built from these, so both
   are required **before** `crypto key generate rsa`.
+- `enable secret class123` — the privileged-mode password. **Critical:** over a
+  remote session (SSH/VTY) you cannot enter privileged mode (`R1#`) unless an
+  enable secret is set. It must be configured from the console *before* you try
+  to `enable` over SSH — otherwise you get "% No password set".
 - `username admin secret cisco123` — a local account; `login local` makes the
   VTY lines check it.
 - `crypto key generate rsa` (1024-bit) — creates the keys that make SSH secure;
@@ -96,18 +104,22 @@ On PC1's Command Prompt:
 ssh -l admin 192.168.1.1
 ```
 
-Enter the password (`cisco123`) at the prompt. You land on the `R1>` prompt over
-an encrypted session — SSH is working.
+Enter the login password (`cisco123`). You land on the `R1>` prompt over an
+encrypted session — SSH is working. To reach privileged mode:
 
-## Step 4 — device hardening
+```
+enable
+```
+
+Enter the enable secret (`class123`) → you get `R1#`. (This only works because
+the enable secret was set in Step 2. Without it, remote `enable` is blocked.)
+
+## Step 4 — additional device hardening
 
 ```
 configure terminal
 
-! encrypted privileged-mode password
-enable secret class123
-
-! encrypt all other plain-text passwords in the config
+! encrypt all plain-text passwords in the config
 service password-encryption
 
 ! console (physical) access password
@@ -130,8 +142,8 @@ copy running-config startup-config
 
 ### Hardening commands explained
 
-- `enable secret` — privileged-mode password, stored encrypted (unlike the old
-  `enable password`).
+- `enable secret` (set in Step 2) — privileged-mode password, stored encrypted
+  (unlike the old `enable password`). Also required for remote privileged access.
 - `service password-encryption` — scrambles all plain-text passwords in the
   config.
 - `line console 0` + `password`/`login` — requires a password for physical
@@ -171,9 +183,11 @@ Now only 192.168.1.10 can even attempt an SSH connection.
 
 | Symptom | Likely cause |
 |---------|-------------|
+| `% No password set` when `enable` over SSH | No enable secret — set `enable secret` from the console first (privileged mode over SSH requires it) |
 | `crypto key generate rsa` rejected | hostname or `ip domain-name` not set first |
 | SSH connection refused | VTY missing `transport input ssh` or `login local` |
 | Login fails | No local `username`, or wrong password |
+| `conf t` rejected at `R1>` | You're in user mode — `enable` into privileged mode (`R1#`) first |
 | Telnet still works | VTY still allows telnet — set `transport input ssh` |
 | PC can't reach router | IP/gateway wrong, or interface down |
 
