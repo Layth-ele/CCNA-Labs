@@ -12,11 +12,14 @@ the IPv6 version of the static routing lab.
    LAN A                                          LAN B
 2001:DB8:A::/64                            2001:DB8:B::/64
      |                                            |
-  +-------+   G0/0    WAN 2001:DB8:C::/64   G0/0  +-------+
+  +-------+  G0/0     WAN 2001:DB8:C::/64   G0/0  +-------+
   |Switch1|--[ R1 ]==========================[ R2 ]--|Switch2|
-  +---+---+  ::1        ::1        ::2       ::1  +---+---+
-    PC1                                            PC2
+  +---+---+       Gig0/1            Gig0/0        +---+---+
+    PC1      ::1(A)  ::1(C)   ::2(C)  ::1(B)        PC2
 ```
+
+Both routers connect the LAN on Gig0/0 and the WAN on Gig0/1 (R1) / Gig0/0 (R2)
+— match the config to your actual cabling.
 
 ## Equipment
 
@@ -41,10 +44,10 @@ the IPv6 version of the static routing lab.
 - IPv6 addresses are **128-bit**, written as 8 groups of 4 hex digits separated
   by colons.
 - **`::`** replaces one run of consecutive all-zero groups. So `2001:DB8:A::1`
-  expands to `2001:0DB8:000A:0000:0000:0000:0000:0001`.
+  expands to `2001:0DB8:000A:0000:0000:0000:0000:0001`. Only **one** `::` is
+  allowed per address.
 - **`/64`** is the standard LAN prefix length (the IPv6 equivalent of `/24`).
-- **`2001:DB8::/32`** is the reserved documentation/example range — used here
-  because it is meant for labs and docs.
+- **`2001:DB8::/32`** is the reserved documentation/example range.
 
 ## R1 configuration
 
@@ -104,8 +107,10 @@ copy running-config startup-config
   is **off by default**; this turns it on. Forget it and nothing routes. (IPv4
   routing is on by default, so there's no IPv4 equivalent.)
 - `ipv6 address 2001:DB8:A::1/64` — assigns the IPv6 address + prefix length.
-- `ipv6 route <dest-prefix> <next-hop>` — the IPv6 version of `ip route`
-  (static route to a non-directly-connected network).
+- `ipv6 route <dest-prefix> <next-hop>` — the IPv6 version of `ip route`.
+- To fix a wrong address, remove it first: `no ipv6 address <bad-addr>/64`
+  (an IPv6 interface can hold multiple addresses, so a new one won't replace
+  the old — you must remove the wrong one).
 
 ## Set the PCs
 
@@ -128,8 +133,7 @@ show ipv6 route              ! IPv6 routing table (C, L, S codes, like IPv4)
 
 `show ipv6 route` should list the static route with an **S** and connected
 routes with **C**. Every interface also has an automatic **link-local** address
-starting with `FE80::` — IPv6 generates one on every interface for local
-communication.
+starting with `FE80::`.
 
 ## Troubleshooting
 
@@ -137,16 +141,17 @@ communication.
 |---------|-------------|
 | Ping across networks fails | Forgot `ipv6 unicast-routing` on a router |
 | Cross-network ping fails, gateway works | Static route missing on one router |
-| Interface has only FE80:: address | `ipv6 address` not configured (only link-local auto-generated) |
-| PC can't reach gateway | PC IPv6/prefix/gateway wrong |
+| Interface has only FE80:: address | `ipv6 address` not configured |
+| Wrong address still shows after fixing | Old address not removed — use `no ipv6 address <bad>/64` |
 | Address rejected | Bad `::` compression (only one `::` allowed per address) |
+| PC can't reach gateway | PC IPv6 / prefix / gateway wrong |
 
 ## Why it matters
 
 IPv4 has ~4.3 billion addresses and the world ran out; IPv6 has 340 undecillion.
 Modern networks run **dual-stack** (IPv4 + IPv6 together). The essentials —
-address format, `::` compression, `ipv6 unicast-routing`, and `ipv6 route` —
-are a solid chunk of the CCNA.
+address format, `::` compression, `ipv6 unicast-routing`, and `ipv6 route` — are
+a solid chunk of the CCNA.
 
 ## Files
 
