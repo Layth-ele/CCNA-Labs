@@ -2,8 +2,7 @@
 
 Two routers running **OSPFv3**, the IPv6 version of OSPF. Instead of typing
 `ipv6 route` static routes by hand, the routers advertise their IPv6 networks
-and learn each other's routes automatically. Same topology as the IPv6 lab —
-only the routing method changes.
+and learn each other's routes automatically.
 
 ## Topology
 
@@ -49,20 +48,6 @@ Both routers connect the LAN on Gig0/0 and the WAN on Gig0/1 (R1) / Gig0/0 (R2)
   32-bit value.
 - Everything else (areas, neighbors, FULL state, the `O` route) works the same.
 
-## Step 0 — remove old static routes (if reusing the IPv6 lab)
-
-```
-! On R1:
-configure terminal
-no ipv6 route 2001:DB8:B::/64 2001:DB8:C::2
-end
-
-! On R2:
-configure terminal
-no ipv6 route 2001:DB8:A::/64 2001:DB8:C::1
-end
-```
-
 ## R1 configuration
 
 ```
@@ -70,6 +55,16 @@ enable
 configure terminal
 
 ipv6 unicast-routing
+
+interface gigabitEthernet0/0
+ ipv6 address 2001:DB8:A::1/64
+ no shutdown
+ exit
+
+interface gigabitEthernet0/1
+ ipv6 address 2001:DB8:C::1/64
+ no shutdown
+ exit
 
 ipv6 router ospf 1
  router-id 1.1.1.1
@@ -95,6 +90,16 @@ configure terminal
 
 ipv6 unicast-routing
 
+interface gigabitEthernet0/0
+ ipv6 address 2001:DB8:C::2/64
+ no shutdown
+ exit
+
+interface gigabitEthernet0/1
+ ipv6 address 2001:DB8:B::1/64
+ no shutdown
+ exit
+
 ipv6 router ospf 1
  router-id 2.2.2.2
  exit
@@ -114,6 +119,8 @@ copy running-config startup-config
 ## What each part does
 
 - `ipv6 unicast-routing` — required; IPv6 routing is off by default.
+- `ipv6 address ... /64` + `no shutdown` on each interface — assign the IPv6
+  address and bring the interface up.
 - `ipv6 router ospf 1` + `router-id 1.1.1.1` — starts the OSPFv3 process and sets
   a manual router ID (required; use a unique IPv4-format ID per router).
 - `ipv6 ospf 1 area 0` on each interface — enables OSPFv3 directly on the
@@ -129,7 +136,7 @@ Each PC → **Desktop → IP Configuration → IPv6 section**:
 
 ## Testing connectivity
 
-From PC1: `ping 2001:DB8:B::10` (PC2) → succeeds, but the route was learned
+From PC1: `ping 2001:DB8:B::10` (PC2) → succeeds, and the route was learned
 dynamically by OSPFv3 rather than typed in as a static route.
 
 ## Verify
