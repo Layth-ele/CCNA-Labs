@@ -14,11 +14,19 @@ the topology, addressing, configuration, and verification steps.
 | 04 | [OSPF (single-area)](04-ospf/) | Dynamic routing, OSPF neighbors, wildcard masks |
 | 05 | [DHCP](05-dhcp/) | Router as DHCP server, address pools, excluded addresses, leases |
 | 06 | [NAT / PAT](06-nat/) | NAT overload, inside/outside interfaces, ACL match, default route |
+| 07 | [ACLs](07-acl/) | Standard & extended ACLs, permit/deny, filtering traffic on interfaces |
+| 08 | [VLAN Trunking](08-vlan-trunking/) | 802.1Q trunks between switches, allowed VLANs, DTP / `nonegotiate` |
+| 09 | [Spanning Tree](09-spanning-tree/) | STP, root bridge election, port roles/states, PortFast |
+| 10 | [EtherChannel](10-etherchannel/) | Link aggregation, LACP/PAgP, port-channel bundles |
+| 11 | [Port Security](11-port-security/) | MAC address limiting, sticky MACs, violation modes |
+| 12 | [SSH / Device Hardening](12-ssh-hardening/) | SSH access, VTY lines, `enable secret`, banners, service hardening |
+| 13 | [IPv6 Addressing & Static Routing](13-ipv6/) | IPv6 unicast-routing, `/64` addressing, IPv6 static routes |
+| 14 | [OSPFv3](14-ospfv3/) | OSPF for IPv6, per-interface enablement, IPv4-format router-id |
 
 ## Roadmap
 
-Planned: ACLs, VLAN trunking across switches, EtherChannel, Spanning Tree,
-port security, SSH/device hardening, IPv6, wireless.
+Planned: wireless (WLC/AP basics), and additional multi-area / redistribution
+routing scenarios.
 
 ## Notes
 
